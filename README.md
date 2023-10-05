@@ -25,6 +25,10 @@
 
 1. Runserver using this command: `python main/manage.py runserver`
 
+1. acccess the web application using a webbrowser:
+
+   ![landing page screenshot](images/ss-mainpage.png)
+
 ## Dependencies
 
 ```bash
