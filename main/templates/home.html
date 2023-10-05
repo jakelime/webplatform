@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="row pb-4 align-items-md-stretch">
+    <div class="col-md-12">
+      <div class="h-100 p-3 text-bg-dark rounded-3">
+        {% if user.is_authenticated %}
+          <div class="d-flex align-items-center justify-content-center">
+            <h2>Hi {{ user.preferred_name }}!</h2>
+          </div>
+          <div class="d-flex align-items-center justify-content-center">
+            <form action="{% url 'logout' %}">
+              <input class="btn btn-outline-light" type="submit" value='Logout'>
+            </form>
+            <form action={{ user.get_profile_url }}>
+              <input class="btn btn-outline-light" type="submit" value='ManageProfile'>
+            </form>
+          </div>
+        {% else %}
+          <div class="d-flex align-items-center justify-content-center">
+            <h2>You are not logged in!</h2>
+          </div>
+          <div class="d-flex align-items-center justify-content-center">
+            <form action="{% url 'login' %}">
+              <input class="btn btn-outline-light" type="submit" value='Log In'>
+            </form>
+            <form action="{% url 'accounts:signup' %}">
+              <input class="btn btn-outline-light" type="submit" value='Register'>
+            </form>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <div class="p-5 mb-4 bg-light rounded-3">
+    <div class="container-fluid py-5">
+      <h1 class="display-5 fw-bold">Product Test Management System</h1>
+      <p class="col-md-8 text-justify">
+        PTMS to unify management of new products and projects.
+        <br>
+        Equipped with intelligent tools and designed to be friendly for all.
+      </p>
+      <form action="{{ url_ptms }}">
+        <input class="btn btn-primary btn-lg" type="submit" value="Access PTMS">
+      </form>
+    </div>
+  </div>
+  <div class="row align-items-md-stretch">
+    <div class="col-md-6 pt-2 pb-2">
+      <div class="h-100 p-5 bg-light border rounded-3">
+        <h2>Repositories</h2>
+        <p>Powered using Bitbucket</p>
+        <form action="https://sgamk-s-lnx404.amsint.com:8443/">
+          <input class="btn btn-outline-secondary"
+                 type="submit"
+                 value="Access Bitbucket">
+        </form>
+      </div>
+    </div>
+    <div class="col-md-6 pt-2 pb-2">
+      <div class="h-100 p-5 bg-light border rounded-3">
+        <h2>Docs</h2>
+        <p>Documentations for Data Analysis Tools</p>
+        <form action="http://sgamk-s-lnx404.amsint.com:28868/">
+          <input class="btn btn-outline-secondary" type="submit" value="Access Docs">
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

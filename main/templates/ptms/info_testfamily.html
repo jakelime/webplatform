@@ -1,0 +1,30 @@
+{% extends 'ptms/base.html' %}
+{% block content %}
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <div class="row col-lg-8 pt-4">
+            <h1>Test Parameters</h1>
+        </div>
+        <div class="d-flex flex-md-wrap">
+            <div class="p-2 bd-highlight">
+                <span class="badge bg-primary increase-size"><a class='badge-link' href={{ url_testparams_list }}>List All</a></span>
+            </div>
+            {% if perms.accounts.is_npd %}
+                <div class="p-2 bd-highlight">
+                    <span class="badge bg-secondary increase-size"><a class='badge-link' href={{ url_testparams_create }}>Create</a></span>
+                </div>
+            {% endif %}
+        </div>
+        <div class="row col-lg-8 pt-4">
+            <h2>User Guide: Test Family</h2>
+            <p>List of test families and descriptions</p>
+        </div>
+        <div class="row col-lg-8 pt-2">
+            {% for object in objects %}
+                <div class="row pt-2">
+                    <h4>{{ object.name|capfirst }}</h4>
+                    <p class="text-justify">{{ object.description }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </main>
+{% endblock content %}

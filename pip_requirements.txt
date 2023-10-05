@@ -1,0 +1,5 @@
+pip install django-crispy-forms
+pip install crispy-bootstrap5
+pip install GitPython
+pip install django-tables2
+pip install python-dotenv
