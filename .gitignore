@@ -5,7 +5,7 @@
 # General
 .DS_Store
 .env
-
+**/migrations/*
 **/__pycache__/
 **/*.log
 
