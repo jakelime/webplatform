@@ -8,19 +8,22 @@
    DJANGO_SECRET_KEY="django-insecure-gkf$-u6kujne%(wx+md(+=82%93wvx$asc)dimx#o5fs#ic+*p"
    ```
 
-1. This project requires another database repo (confidential). You can create a the sqlite3 database in a 
-   the parent of the root directory, i.e. `root_dir = "~/webplatform/"` ,  `database_dir = "~/databases/ptms.sqlite3"`
+1. This project requires another database repo (confidential). You can create a the sqlite3 database in a
+   the parent of the root directory, i.e. `root_dir = "~/webplatform/"` , `database_dir = "~/databases/ptms.sqlite3"`
 
    This can be configured in the `settings.py` file
 
-1. makemigrations: `python main/manage.py makemigrations`
+1. makemigrations and create db
 
-1. create db: `python main/manage.py migrate`
+   ```bash
+   python main/manage.py makemigrations accounts
+   python main/manage.py makemigrations ptms
+   python main/manage.py makemigrations migrate
+   ```
 
 1. create superuser: `python main/manage.py createsuperuser`
 
 1. Runserver using this command: `python main/manage.py runserver`
-
 
 ## Dependencies
 
