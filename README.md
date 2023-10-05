@@ -27,7 +27,9 @@
 
 1. acccess the web application using a webbrowser:
 
-   ![landing page screenshot](images/ss-mainpage.png)
+   ![landing page](images/ss-mainpage.png)
+
+   ![member-only access page](images/ss-member_access_page.png)
 
 ## Dependencies
 
