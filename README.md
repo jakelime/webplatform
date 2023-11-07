@@ -18,7 +18,7 @@
    ```bash
    python main/manage.py makemigrations accounts
    python main/manage.py makemigrations ptms
-   python main/manage.py makemigrations migrate
+   python main/manage.py migrate
    ```
 
 1. create superuser: `python main/manage.py createsuperuser`
