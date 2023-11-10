@@ -12,7 +12,7 @@ urlpatterns = [
     path("signup/", views.SignUpView.as_view(), name="signup"),
     path(
         "create_user",
-        TemplateView.as_view(template_name="accounts/users_create.html"),
+        TemplateView.as_view(template_name="accounts/create_user.html"),
         name="users_create",
     ),
     path("users/<int:pk>", views.CustomUserUpdateView.as_view(), name="user_update"),
