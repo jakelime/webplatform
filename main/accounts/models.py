@@ -42,7 +42,7 @@ class CustomUser(AbstractUser):
         return super().save(*args, **kwargs)
 
     def get_edit_url(self):
-        return reverse_lazy("ptms:users_update", kwargs={"pk": self.pk})
+        return reverse_lazy("accounts:user_update", kwargs={"pk": self.pk})
 
     def get_profile_url(self):
-        return reverse_lazy("ptms:user_profile", kwargs={"pk": self.pk})
+        return reverse_lazy("accounts:update_profile", kwargs={"pk": self.pk})

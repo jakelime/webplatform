@@ -16,12 +16,13 @@
 1. makemigrations and create db
 
    ```bash
-   python main/manage.py makemigrations accounts
-   python main/manage.py makemigrations ptms
-   python main/manage.py migrate
+   cd main
+   python manage.py makemigrations accounts
+   python manage.py makemigrations ptms
+   python manage.py migate
    ```
 
-1. create superuser: `python main/manage.py createsuperuser`
+1. create superuser: `python manage.py createsuperuser`
 
 1. Runserver using this command: `python main/manage.py runserver`
 
