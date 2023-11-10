@@ -168,7 +168,7 @@ class ProjectCreateView(LoginRequiredMixin, CreateView):
 
 class ProjectDetailView(LoginRequiredMixin, DetailView):
     model = Project
-    template_name = "ptms/project_detail.html"
+    template_name = "ptms/project_details.html"
     context_object_name = "project"
 
     def get_context_data(self, *args, **kwargs):

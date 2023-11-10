@@ -6,12 +6,8 @@ from django.urls import reverse
 
 
 class LabRecord(models.Model):
-    name = models.CharField(max_length=100, null=False, blank=False, unique=False)
-    # slug = models.SlugField(null=True, unique=True)
-    code = models.CharField(max_length=20, null=True, blank=True)
-    job_number = models.TextField(null=True, blank=True, max_length=1000)
-    record_id = models.DateField(null=True, blank=True)
-
+    record_id = models.CharField(null=True, blank=True, max_length=50)
+    job_number = models.CharField(null=True, blank=True, max_length=50)
     engine_type = models.CharField(
         max_length=100, null=False, blank=False, unique=False
     )
@@ -36,12 +32,10 @@ class LabRecord(models.Model):
     log_records = models.TextField(null=True, blank=True, default="")
 
     def __str__(self):
-        if self.code:
-            return f"{self.name} ({self.code})"
-        return self.name
+        return f"{self.pk:05d}-{self.engine_make}"
 
     def get_absolute_url(self):
-        return reverse("labrecords:mlrs_details", kwargs={"pk": self.pk})
+        return reverse("mlrs:record_details", kwargs={"pk": self.pk})
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
