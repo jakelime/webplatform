@@ -6,6 +6,11 @@ from django.urls import reverse
 
 
 class LabRecord(models.Model):
+    class TestResult(models.TextChoices):
+        NIL = 0, "NIL"
+        PASS = 1, "PASS"
+        FAIL = 2, "FAIL"
+
     record_id = models.CharField(null=True, blank=True, max_length=50)
     job_number = models.CharField(null=True, blank=True, max_length=50)
     engine_type = models.CharField(
@@ -14,6 +19,18 @@ class LabRecord(models.Model):
     engine_make = models.CharField(
         max_length=100, null=False, blank=False, unique=False
     )
+
+    micro_hardness_descr = models.TextField(null=True, blank=True, max_length=1000)
+    micro_hardness_meas1 = models.FloatField(null=True, blank=True)
+    micro_hardness_meas2 = models.FloatField(null=True, blank=True)
+    micro_hardness_meas3 = models.FloatField(null=True, blank=True)
+    micro_hardness_meas4 = models.FloatField(null=True, blank=True)
+    micro_hardness_meas5 = models.FloatField(null=True, blank=True)
+    micro_hardness_meas_avg = models.FloatField(null=True, blank=True)
+    micro_hardness_results = models.CharField(
+        max_length=5, choices=TestResult.choices, default=TestResult.NIL
+    )
+
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
     user_created = models.ForeignKey(

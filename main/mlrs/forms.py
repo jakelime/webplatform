@@ -27,6 +27,13 @@ class LabRecordCreateForm(forms.ModelForm):
         Field("record_id"),
         Field("engine_type"),
         Field("engine_make"),
+        Field("micro_hardness_meas1"),
+        Field("micro_hardness_meas2"),
+        Field("micro_hardness_meas3"),
+        Field("micro_hardness_meas4"),
+        Field("micro_hardness_meas5"),
+        Field("micro_hardness_avg"),
+        Field("micro_hardness_results"),
         FormActions(
             Submit(
                 "submit",
@@ -38,9 +45,10 @@ class LabRecordCreateForm(forms.ModelForm):
 
     class Meta:
         model = LabRecord
-        fields = (
-            "record_id",
-            "job_number",
-            "engine_type",
-            "engine_make",
-        )
+        fields = "__all__"
+        # fields = (
+        #     "record_id",
+        #     "job_number",
+        #     "engine_type",
+        #     "engine_make",
+        # )
