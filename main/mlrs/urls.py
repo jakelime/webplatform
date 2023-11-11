@@ -24,7 +24,12 @@ urlpatterns = [
     ),
     path(
         "print_record/<int:pk>",
-        views.LabRecordDetailView.as_view(),
+        views.LabRecordPrintView.as_view(),
         name="print_record",
+    ),
+    path(
+        "update_record/<int:pk>",
+        views.LabRecordDetailView.as_view(),
+        name="update_record",
     ),
 ]

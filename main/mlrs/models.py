@@ -55,10 +55,10 @@ class LabRecord(models.Model):
         return reverse("mlrs:record_details", kwargs={"pk": self.pk})
 
     def get_edit_url(self):
-        return reverse("mlrs:record_update", kwargs={"pk": self.pk})
+        return reverse("mlrs:update_record", kwargs={"pk": self.pk})
 
     def get_print_url(self):
-        return reverse("mlrs:record_print", kwargs={"pk": self.pk})
+        return reverse("mlrs:print_record", kwargs={"pk": self.pk})
 
 
     def save(self, *args, **kwargs):

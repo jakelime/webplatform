@@ -4,7 +4,7 @@ from .models import LabRecord
 
 
 class LabRecordListTable(djt.Table):
-    name = djt.LinkColumn("mlrs:record_details", args=[A("slug")])
+    job_number = djt.LinkColumn("mlrs:record_details", args=[A("pk")])
 
     class Meta:
         model = LabRecord

@@ -105,9 +105,9 @@ class LabRecordDetailView(LoginRequiredMixin, DetailView):
         return context
 
 
-class LabRecordPrintlView(LoginRequiredMixin, DetailView):
+class LabRecordPrintView(LoginRequiredMixin, DetailView):
     model = LabRecord
-    template_name = "mlrs/record_details.html"
+    template_name = "mlrs/print_record.html"
     context_object_name = "record"
 
     def get_context_data(self, *args, **kwargs):
