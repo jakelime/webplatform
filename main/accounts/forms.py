@@ -34,8 +34,9 @@ class CustomUserCreationForm(UserCreationForm):
         # existing_username, existing_email =
         for euser, eemail in [(x.username, x.email) for x in CustomUser.objects.all()]:
             if euser == email_username:
-                raise ValidationError(f"Username conflict: '{eemail}' is already in database")
-
+                raise ValidationError(
+                    f"Username conflict: '{eemail}' is sharing same username"
+                )
 
         # if email_domain not in settings.ALLOWED_EMAIL_DOMAINS:
         #     raise ValidationError(
