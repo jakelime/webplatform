@@ -34,8 +34,7 @@ class CustomUserListView(LoginRequiredMixin, ListView):
                 continue
             data = {
                 "user_obj": user_obj,
-                "is_spock_user": user_obj.has_perm("accounts.is_spock_user"),
-                "is_npd": user_obj.has_perm("accounts.is_npd"),
+                "is_approver": user_obj.has_perm("accounts.is_approver"),
                 "is_manager": user_obj.has_perm("accounts.is_manager"),
             }
             objects.append(data)

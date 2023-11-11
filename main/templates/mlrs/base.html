@@ -1,7 +1,7 @@
 {% load static %}
 {% load tags %}
 {% url 'landing' as url_landing %}
-{% url 'mlrs:home' as url_ptms %}
+{% url 'accounts:users_list' as url_users %}
 {% url 'mlrs:home' as url_home %}
 {% url 'mlrs:list_records' as url_mlrs_list %}
 {% url 'mlrs:create_record' as url_mlrs_create %}
@@ -80,7 +80,7 @@
                                         User Profile
                                     </a>
                                 </li>
-                                {% if perms.accounts.is_manager %}
+                                {% if perms.accounts.is_approver %}
                                     <li class="nav-item">
                                         <a class="nav-link {% if request.path == url_users %}active{% endif %}" href={{ url_users }}>
                                             <span data-feather="users" class="align-text-bottom"></span>

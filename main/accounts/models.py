@@ -16,14 +16,12 @@ class CustomUser(AbstractUser):
         unique=True,
         null=False,
         blank=False,
-        validators=[WhitelistEmailValidator(allowlist=settings.ALLOWED_EMAIL_DOMAINS)],
     )
 
     class Meta:
         permissions = (
-            ("is_manager", "Manages projects, manages users."),
-            ("is_npd", "Create and edit projects."),
-            ("is_spock_user", "Access to Spock projects"),
+            ("is_approver", "Approves forms"),
+            ("is_manager", "Manage users"),
         )
 
     # add additional fields in here
@@ -38,7 +36,9 @@ class CustomUser(AbstractUser):
         if not self.last_name:
             self.last_name = self.username.split(".")[-1]
         if not self.preferred_name:
-            self.preferred_name = f"{self.first_name.capitalize()} {self.last_name.capitalize()}"
+            self.preferred_name = (
+                f"{self.first_name.capitalize()} {self.last_name.capitalize()}"
+            )
         return super().save(*args, **kwargs)
 
     def get_edit_url(self):

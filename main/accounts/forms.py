@@ -30,12 +30,20 @@ class CustomUserCreationForm(UserCreationForm):
 
     def clean_email(self):
         email = self.cleaned_data["email"]
-        email_domain = email.split("@")[-1]
-        if email_domain not in settings.ALLOWED_EMAIL_DOMAINS:
-            raise ValidationError(
-                (f"{email_domain} not allowed. Please use {settings.ALLOWED_EMAIL_DOMAINS}"),
-                code="invalid",
-            )
+        email_username, email_domain = email.split("@")
+        # existing_username, existing_email =
+        for euser, eemail in [(x.username, x.email) for x in CustomUser.objects.all()]:
+            if euser == email_username:
+                raise ValidationError(f"Username conflict: '{eemail}' is already in database")
+
+
+        # if email_domain not in settings.ALLOWED_EMAIL_DOMAINS:
+        #     raise ValidationError(
+        #         (
+        #             f"{email_domain} not allowed. Please use {settings.ALLOWED_EMAIL_DOMAINS}"
+        #         ),
+        #         code="invalid",
+        #     )
         return email
 
 

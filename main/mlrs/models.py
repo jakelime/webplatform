@@ -54,5 +54,18 @@ class LabRecord(models.Model):
     def get_absolute_url(self):
         return reverse("mlrs:record_details", kwargs={"pk": self.pk})
 
+    def get_edit_url(self):
+        return reverse("mlrs:record_update", kwargs={"pk": self.pk})
+
+    def get_print_url(self):
+        return reverse("mlrs:record_print", kwargs={"pk": self.pk})
+
+
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
+
+    def get_log_records_list(self):
+        if isinstance(self.log_records, str):
+            return self.log_records.split("/n")
+        else:
+            return ["error"]
