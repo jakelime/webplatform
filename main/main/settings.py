@@ -153,5 +153,5 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-PROJECT_LOG_MAXLENGTH = 100
+RECORD_LOG_MAXLENGTH = 100
 SW_VERSION = get_latest_git_tag(BASE_DIR)

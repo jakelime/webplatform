@@ -29,7 +29,12 @@ urlpatterns = [
     ),
     path(
         "update_record/<int:pk>",
-        views.LabRecordDetailView.as_view(),
+        views.LabRecordUpdateView.as_view(),
         name="update_record",
+    ),
+    path(
+        "approve_record/<int:pk>",
+        views.LabRecordApprovalView.as_view(),
+        name="approve_record",
     ),
 ]

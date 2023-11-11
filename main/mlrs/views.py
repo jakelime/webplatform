@@ -1,4 +1,5 @@
 import datetime
+from django.utils import timezone
 from django.shortcuts import render
 from django.views.generic.base import TemplateView
 from django.http import HttpResponse
@@ -22,7 +23,7 @@ from accounts.models import CustomUser
 from accounts.forms import CustomUserChangeForm, CustomUserProfileForm
 
 from .models import LabRecord
-from .forms import LabRecordCreateForm
+from .forms import LabRecordCreateForm, LabRecordUpdateForm, LabRecordApprovalForm
 from .tables import LabRecordListTable
 
 from main.utils import get_time
@@ -37,7 +38,8 @@ class LabRecordHomeView(SingleTableView):
     template_name = "mlrs/records_list.html"
 
     def get_queryset(self):
-        today = datetime.date.today()
+        # today = datetime.date.today()
+        today = timezone.now()
         first = today.replace(day=1)
         last_month = first - datetime.timedelta(days=1)
         queryset = LabRecord.objects.filter(date_updated__gte=last_month)
@@ -69,6 +71,7 @@ class LabRecordCreate(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         record = form.save(commit=False)
+        record.approval_status = 0
         record.user_created = self.request.user
         record.user_updated = self.request.user
         record.log_records = f"{get_time()} - Created by {self.request.user}"
@@ -90,6 +93,46 @@ class LabRecordCreate(LoginRequiredMixin, CreateView):
     #     project.log_records = "\n".join(log_records)
     #     project.save()
     #     return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy("mlrs:record_details", kwargs={"pk": self.object.pk})
+
+
+class LabRecordUpdateView(LoginRequiredMixin, UpdateView):
+    model = LabRecord
+    form_class = LabRecordUpdateForm
+    template_name = "mlrs/update_record.html"
+
+    def form_valid(self, form):
+        record = form.save(commit=False)
+        record.user_updated = self.request.user
+        record.log_records = f"{get_time()} - Updated by {self.request.user}"
+        record.save()
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy("mlrs:record_details", kwargs={"pk": self.object.pk})
+
+
+class LabRecordApprovalView(LoginRequiredMixin, UpdateView):
+    model = LabRecord
+    form_class = LabRecordApprovalForm
+    template_name = "mlrs/update_record.html"
+
+    def form_valid(self, form):
+        record = form.save(commit=False)
+        record.user_updated = self.request.user
+        log_records = self.model.objects.get(pk=record.id).log_records.split("\n")
+        if not log_records:
+            log_records = []
+        log_records.append(
+            f"{get_time()} - APPROVAL CHANGE to {record.approval_status} by {self.request.user}"
+        )
+        if len(log_records) < settings.RECORD_LOG_MAXLENGTH:
+            log_records = log_records[: settings.RECORD_LOG_MAXLENGTH]
+        record.log_records = "\n".join(log_records)
+        record.save()
+        return super().form_valid(form)
 
     def get_success_url(self):
         return reverse_lazy("mlrs:record_details", kwargs={"pk": self.object.pk})

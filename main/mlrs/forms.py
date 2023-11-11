@@ -76,10 +76,101 @@ class LabRecordCreateForm(forms.ModelForm):
     class Meta:
         model = LabRecord
         # fields = "__all__"
-        exclude = ("user_created", "user_updated", "log_records")
+        exclude = ("user_created", "user_updated", "log_records", "approval_status")
         # fields = (
         #     "record_id",
         #     "job_number",
         #     "engine_type",
         #     "engine_make",
         # )
+
+
+class LabRecordUpdateForm(forms.ModelForm):
+    helper = FormHelper()
+    helper.form_class = "form-horizontal"
+    helper.help_text_inline = True
+    helper.layout = Layout(
+        Fieldset(
+            "Record Information",
+            "job_number",
+            "record_id",
+            "engine_type",
+            "engine_make",
+        ),
+        Fieldset(
+            "Microhardness test",
+            Div(
+                CssMFieldSmall("micro_hardness_meas1"),
+                CssMFieldSmall("micro_hardness_meas2"),
+                CssMFieldSmall("micro_hardness_meas3"),
+                CssMFieldSmall("micro_hardness_meas4"),
+                CssMFieldSmall("micro_hardness_meas5"),
+                css_class="row gx-5",
+            ),
+            Div(
+                CssMFieldMedium("micro_hardness_meas_avg"),
+                CssMFieldMedium("micro_hardness_results"),
+                css_class="row gx-5",
+            ),
+        ),
+        FormActions(
+            Submit(
+                "submit",
+                "Update Record",
+                css_class="btn btn-primary btn-lg btn-block",
+            ),
+        ),
+    )
+
+    class Meta:
+        model = LabRecord
+        exclude = ("user_created", "user_updated", "log_records", "approval_status")
+
+
+class LabRecordApprovalForm(forms.ModelForm):
+    helper = FormHelper()
+    helper.form_class = "form-horizontal"
+    helper.help_text_inline = True
+    helper.layout = Layout(
+        Fieldset(
+            "Record Information",
+            "job_number",
+            "record_id",
+            "engine_type",
+            "engine_make",
+        ),
+        Fieldset(
+            "Microhardness test",
+            Div(
+                CssMFieldSmall("micro_hardness_meas1"),
+                CssMFieldSmall("micro_hardness_meas2"),
+                CssMFieldSmall("micro_hardness_meas3"),
+                CssMFieldSmall("micro_hardness_meas4"),
+                CssMFieldSmall("micro_hardness_meas5"),
+                css_class="row gx-5",
+            ),
+            Div(
+                CssMFieldMedium("micro_hardness_meas_avg"),
+                CssMFieldMedium("micro_hardness_results"),
+                css_class="row gx-5",
+            ),
+        ),
+        Fieldset(
+            "READ CAREFULLY!",
+            Div(
+                CssMFieldMedium("approval_status"),
+                css_class="row gx-5",
+            ),
+        ),
+        FormActions(
+            Submit(
+                "submit",
+                "Update APPROVAL",
+                css_class="btn btn-primary btn-lg btn-block",
+            ),
+        ),
+    )
+
+    class Meta:
+        model = LabRecord
+        exclude = ("user_created", "user_updated", "log_records")

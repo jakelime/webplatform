@@ -1,16 +1,26 @@
 from django.db import models
 from django.conf import settings
 from django.urls import reverse
+from django.utils.translation import gettext_lazy
 
 # Create your models here.
 
 
 class LabRecord(models.Model):
-    class TestResult(models.TextChoices):
-        NIL = 0, "NIL"
-        PASS = 1, "PASS"
-        FAIL = 2, "FAIL"
+    class ApprovalStatus(models.TextChoices):
+        PENDING = 0, gettext_lazy("Pending")
+        APPROVED = 1, gettext_lazy("Approved")
+        REJECTED = 2, gettext_lazy("Rejected")
+        C_APPROVED = 3, gettext_lazy("ConditionalApproval")
 
+    class TestResult(models.TextChoices):
+        NIL = 0, gettext_lazy("NIL")
+        PASS = 1, gettext_lazy("PASS")
+        FAIL = 2, gettext_lazy("FAIL")
+
+    approval_status = models.CharField(
+        max_length=20, choices=ApprovalStatus.choices, default=ApprovalStatus.PENDING
+    )
     record_id = models.CharField(null=True, blank=True, max_length=50)
     job_number = models.CharField(null=True, blank=True, max_length=50)
     engine_type = models.CharField(
@@ -57,9 +67,11 @@ class LabRecord(models.Model):
     def get_edit_url(self):
         return reverse("mlrs:update_record", kwargs={"pk": self.pk})
 
+    def get_approve_url(self):
+        return reverse("mlrs:approve_record", kwargs={"pk": self.pk})
+
     def get_print_url(self):
         return reverse("mlrs:print_record", kwargs={"pk": self.pk})
-
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
