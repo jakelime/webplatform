@@ -1,6 +1,29 @@
+
+pip install flask
+pip install django
+pip install gunicorn
+pip install GitPython
+pip install pytest
+pip install pyinstaller
+
+pip install pandas
+pip install statsmodels
+pip install matplotlib
+pip install seaborn
+pip install scipy
+pip install opencv-python
+pip install python-pptx
+pip install openpyxl
+pip install xlrd
+pip install pypdf
+pip install tabula-py
+pip install dash
+pip install plotly
+
 pip install django-crispy-forms
 pip install crispy-bootstrap5
-pip install GitPython
 pip install django-tables2
 pip install python-dotenv
 pip install django-filter
+pip install djlint
+

@@ -19,7 +19,7 @@
    cd main
    python manage.py makemigrations accounts
    python manage.py makemigrations ptms
-   python manage.py migate
+   python manage.py migrate
    ```
 
 1. create superuser: `python manage.py createsuperuser`
