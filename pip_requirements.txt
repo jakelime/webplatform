@@ -5,6 +5,8 @@ pip install gunicorn
 pip install GitPython
 pip install pytest
 pip install pyinstaller
+pip install black
+pip install djlint
 
 pip install pandas
 pip install statsmodels
@@ -25,5 +27,5 @@ pip install crispy-bootstrap5
 pip install django-tables2
 pip install python-dotenv
 pip install django-filter
-pip install djlint
+
 
